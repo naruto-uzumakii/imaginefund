@@ -104,9 +104,7 @@ function WireframeGlobe() {
           <bufferGeometry>
             <bufferAttribute
               attach="attributes-position"
-              count={points.length}
-              array={new Float32Array(points.flatMap((p) => [p.x, p.y, p.z]))}
-              itemSize={3}
+              args={[new Float32Array(points.flatMap((p) => [p.x, p.y, p.z])), 3]}
             />
           </bufferGeometry>
           <primitive object={lineMaterial} attach="material" />
@@ -117,9 +115,7 @@ function WireframeGlobe() {
           <bufferGeometry>
             <bufferAttribute
               attach="attributes-position"
-              count={points.length}
-              array={new Float32Array(points.flatMap((p) => [p.x, p.y, p.z]))}
-              itemSize={3}
+              args={[new Float32Array(points.flatMap((p) => [p.x, p.y, p.z])), 3]}
             />
           </bufferGeometry>
           <primitive object={lineMaterial} attach="material" />
