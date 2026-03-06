@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import CiteMark from "@/components/ui/CiteMark"
 import Reveal from "@/components/animations/Reveal"
+import Image from "next/image"
 
 const corridorStats = [
   { label: "Cost of Ops", india: "1/5th", us: "1×", description: "India engineering costs vs. US equivalents." },
@@ -12,96 +13,97 @@ const corridorStats = [
 
 export default function Vision() {
   return (
-    <section id="vision" className="relative w-full py-44 px-6 sm:px-8 md:px-12 bg-[var(--color-bg)]">
+    <section id="vision" className="relative w-full bg-[var(--color-bg)] hairline-t">
 
-      <div className="max-w-[1200px] mx-auto">
+      <div className="section-pad container-base">
 
-        <div className="border-t border-[var(--color-border)] pt-8 mb-16">
-          <Reveal>
-            <p className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)] flex items-center gap-2.5">
-              <span className="w-1 h-1 rounded-full bg-[var(--color-text-secondary)] opacity-40" />
-              06 &mdash; The Corridor
-            </p>
-          </Reveal>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 mb-12">
-          <div className="md:col-span-5">
+          {/* Left Column: Text and Stats */}
+          <div className="lg:col-span-6 flex flex-col justify-center">
+            <Reveal>
+              <div className="text-eyebrow text-[var(--color-accent)] mb-12">
+                04 — The Corridor
+              </div>
+            </Reveal>
+
             <Reveal delay={0.1}>
-              <h2 className="font-[family-name:var(--font-display)] font-normal text-[clamp(1.5rem,2.2vw,2.2rem)] leading-[1.15] tracking-tight-editorial text-[var(--color-text)]">
-                Geography is not <em className="italic text-[var(--color-text-secondary)]">destiny.</em>
+              <h2 className="text-h2 text-black mb-8">
+                Geography is not <em className="italic text-black/60">destiny.</em>
               </h2>
             </Reveal>
-          </div>
-          <div className="md:col-span-7">
+
             <Reveal delay={0.2}>
-              <p className="font-[family-name:var(--font-body)] text-[0.85rem] leading-[1.7] text-[var(--color-text-secondary)] max-w-[480px]">
+              <p className="text-body-base text-black/80 max-w-[480px] mb-6">
                 Only 5–10% of qualified Indian founders get the infrastructure to break out globally. The rest plateau from lack of leverage, not lack of ambition.
                 <CiteMark cardKey="india-corridor" number={9} />
               </p>
-              <p className="font-[family-name:var(--font-body)] text-[0.85rem] leading-[1.7] text-[var(--color-text-secondary)] max-w-[480px] mt-5">
+              <p className="text-body-base text-black/80 max-w-[480px] mb-16">
                 Imagine Fund builds the corridor: engineering density in Bangalore, GTM in San Francisco, distribution everywhere.
               </p>
             </Reveal>
-          </div>
-        </div>
 
-        <div className="w-full flex flex-col">
-          {/* Table header */}
-          <div className="grid grid-cols-12 pb-3 mb-0">
-            <div className="col-span-3">
-              <span className="font-[family-name:var(--font-mono)] text-[0.55rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
-                Metric
-              </span>
+            {/* Stats Table */}
+            <div className="w-full flex flex-col border-t border-black/10">
+              {corridorStats.map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i, duration: 0.7 }}
+                  className={`grid grid-cols-12 py-6 items-center row-hover border-b border-black/10`}
+                >
+                  <div className="col-span-4 lg:col-span-3">
+                    <span className="text-eyebrow text-black/50">
+                      {item.label}
+                    </span>
+                  </div>
+                  <div className="col-span-4 lg:col-span-3">
+                    <span className="text-h3 text-black">
+                      {item.india}
+                    </span>
+                  </div>
+                  <div className="col-span-4 lg:col-span-6">
+                    <span className="text-body-sm text-black/60 block md:inline">
+                      <span className="opacity-40 line-through mr-2 text-mono-sm">{item.us}</span> {item.description}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-            <div className="col-span-3">
-              <span className="font-[family-name:var(--font-mono)] text-[0.55rem] uppercase tracking-[0.15em] text-[var(--color-text)]">
-                India
-              </span>
-            </div>
-            <div className="col-span-3">
-              <span className="font-[family-name:var(--font-mono)] text-[0.55rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)] opacity-40">
-                US
-              </span>
-            </div>
-            <div className="col-span-3" />
           </div>
 
-          {corridorStats.map((item, i) => (
+          {/* Right Column: Editorial Image */}
+          <div className="lg:col-span-6 relative h-[60vh] lg:h-auto min-h-[500px]">
             <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.08 * i, duration: 0.7 }}
-              className={`grid grid-cols-12 border-t border-[var(--color-border)] py-5 items-baseline row-hover ${
-                i === corridorStats.length - 1 ? "border-b" : ""
-              }`}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full h-full relative overflow-hidden bg-[#F3F2EE]"
             >
-              <div className="col-span-3">
-                <span className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
-                  {item.label}
-                </span>
-              </div>
-              <div className="col-span-3">
-                <span className="font-[family-name:var(--font-display)] text-[clamp(1rem,1.5vw,1.4rem)] leading-none text-[var(--color-text)]">
-                  {item.india}
-                </span>
-              </div>
-              <div className="col-span-3">
-                <span className="font-[family-name:var(--font-body)] text-[0.8rem] text-[var(--color-text-secondary)] opacity-40">
-                  {item.us}
-                </span>
-              </div>
-              <div className="col-span-3">
-                <span className="font-[family-name:var(--font-body)] text-[0.75rem] leading-[1.5] text-[var(--color-text-secondary)]">
-                  {item.description}
+              {/* Crop marks for aesthetic */}
+              <span className="absolute top-0 left-0 w-8 h-[1px] bg-black/20 z-10" />
+              <span className="absolute top-0 left-0 w-[1px] h-8 bg-black/20 z-10" />
+              <span className="absolute bottom-0 right-0 w-8 h-[1px] bg-black/20 z-10" />
+              <span className="absolute bottom-0 right-0 w-[1px] h-8 bg-black/20 z-10" />
+
+              <img
+                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
+                alt="Abstract architectural topology"
+                className="editorial-media inset-0 absolute h-full w-full object-cover scale-105 hover:scale-100 transition-transform duration-1000 ease-out"
+              />
+
+              <div className="absolute bottom-6 left-6 z-10 bg-white/80 backdrop-blur-sm px-3 py-1.5 border border-black/10">
+                <span className="text-eyebrow text-black">
+                  Fig 1. Topology
                 </span>
               </div>
             </motion.div>
-          ))}
-        </div>
+          </div>
 
+        </div>
       </div>
     </section>
   )

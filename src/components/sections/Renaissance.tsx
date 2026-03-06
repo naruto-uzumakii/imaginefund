@@ -13,66 +13,92 @@ const phases = [
 
 export default function Renaissance() {
   return (
-    <section id="renaissance" className="relative w-full py-44 px-6 sm:px-8 md:px-12 bg-[var(--color-bg)]">
+    <section id="renaissance" className="relative w-full bg-white hairline-t">
 
-      <div className="max-w-[1200px] mx-auto">
+      <div className="section-pad container-base">
 
-        <div className="border-t border-[var(--color-border)] pt-8 mb-16">
-          <Reveal>
-            <p className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)] flex items-center gap-2.5">
-              <span className="w-1 h-1 rounded-full bg-[var(--color-text-secondary)] opacity-40" />
-              04 &mdash; The Program
-            </p>
-          </Reveal>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 min-h-[70vh]">
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 mb-12">
-          <div className="md:col-span-5">
-            <Reveal delay={0.1}>
-              <h2 className="font-[family-name:var(--font-display)] font-normal text-[clamp(1.5rem,2.2vw,2.2rem)] leading-[1.15] tracking-tight-editorial text-[var(--color-text)]">
-                120 days from zero to launch.
-              </h2>
-            </Reveal>
+          {/* Left column — heading + description */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+
+            <div className="pt-8">
+              <Reveal>
+                <span className="text-eyebrow text-black/50 mb-4 block">
+                  Market
+                </span>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="text-h2 text-black max-w-[400px]">
+                  120 days from zero to launch.
+                </h2>
+              </Reveal>
+            </div>
+
+            <div className="pb-16 pt-24">
+              <Reveal delay={0.3}>
+                <p className="text-body-base text-black/60 max-w-[320px]">
+                  Structured hours every week. Design, growth, creative direction, introductions. Output, not advice. 24-hour build sprints. Drop Nights for public shipping.
+                  <CiteMark cardKey="renaissance-how" number={6} />
+                </p>
+              </Reveal>
+            </div>
           </div>
-          <div className="md:col-span-7">
-            <Reveal delay={0.2}>
-              <p className="font-[family-name:var(--font-body)] text-[0.85rem] leading-[1.7] text-[var(--color-text-secondary)] max-w-[480px]">
-                Structured hours every week. Design, growth, creative direction, introductions. Output, not advice. 24-hour build sprints. Drop Nights for public shipping.
-                <CiteMark cardKey="renaissance-how" number={6} />
-              </p>
-            </Reveal>
-          </div>
-        </div>
 
-        <div className="w-full flex flex-col">
-          {phases.map((phase, i) => (
-            <motion.div
-              key={phase.name}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.08 * i, duration: 0.7 }}
-              className={`w-full grid grid-cols-1 md:grid-cols-12 border-t border-[var(--color-border)] py-6 row-hover ${
-                i === phases.length - 1 ? "border-b" : ""
-              }`}
-            >
-              <div className="col-span-1 md:col-span-2 flex items-baseline">
-                <span className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
-                  {phase.month}
-                </span>
+          {/* Right column — The minimal light timeline panel */}
+          <div className="lg:col-span-7 bg-[var(--color-bg)] rounded-3xl p-12 lg:p-24 border border-black/5 relative overflow-hidden">
+
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--color-bg)] to-transparent z-10 pointer-events-none" />
+
+            <div className="relative">
+              {phases.map((phase, i) => (
+                <motion.div
+                  key={phase.name}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ delay: 0.1 + 0.1 * i, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex items-start"
+                >
+                  {/* Left phase name */}
+                  <div className="w-[120px] shrink-0 text-right pr-8 md:pr-12 pt-0.5">
+                    <span className="text-body-base font-medium text-black block">
+                      {phase.name}
+                    </span>
+                  </div>
+
+                  {/* Center Dot and vertical line */}
+                  <div className="flex flex-col items-center shrink-0 relative w-3 pt-2">
+                    <div className="w-2.5 h-2.5 rounded-full bg-black relative z-10" />
+                    {/* The continuous line spanning down */}
+                    <div className={`w-[1px] bg-black/10 absolute top-4 ${i === phases.length - 1 ? 'h-[100px]' : 'h-[calc(100%+64px)]'}`} />
+                  </div>
+
+                  {/* Right description */}
+                  <div className="flex-1 pl-8 md:pl-12 pb-16">
+                    <p className="text-body-base text-black/60 max-w-[380px]">
+                      {phase.description}
+                    </p>
+                    <span className="text-mono-sm text-black/40 mt-3 block">
+                      {phase.month}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* Bottom arrow tip */}
+              <div className="flex items-start opacity-30 mt-8">
+                <div className="w-[120px] shrink-0 pr-8 md:pr-12" />
+                <div className="flex flex-col items-center shrink-0 relative w-3 pt-4">
+                  <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6L0.535898 0H7.4641L4 6Z" fill="black" />
+                  </svg>
+                </div>
               </div>
-              <div className="col-span-1 md:col-span-3 flex items-baseline mt-1 md:mt-0">
-                <span className="font-[family-name:var(--font-display)] text-[clamp(1.2rem,1.8vw,1.6rem)] leading-none text-[var(--color-text)]">
-                  {phase.name}
-                </span>
-              </div>
-              <div className="col-span-1 md:col-span-7 flex items-baseline mt-2 md:mt-0">
-                <span className="font-[family-name:var(--font-body)] text-[0.8rem] leading-[1.6] text-[var(--color-text-secondary)]">
-                  {phase.description}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+
+            </div>
+          </div>
+
         </div>
 
       </div>

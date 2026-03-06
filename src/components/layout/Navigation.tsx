@@ -37,10 +37,15 @@ export default function Navigation() {
         initial={{ y: 0 }}
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-4 sm:px-8 md:px-16 h-16 transition-all duration-700 bg-[var(--color-bg)] ${scrolled ? "border-b border-[var(--color-border)]" : "border-b border-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-4 sm:px-8 md:px-16 h-16 transition-all duration-700 ${
+          scrolled
+            ? "bg-transparent border-b border-transparent"
+            : "bg-transparent border-b border-transparent"
+        }`}
       >
-        <a href="#" className="font-[family-name:var(--font-mono)] font-medium text-[0.65rem] tracking-[0.15em] uppercase text-[var(--color-text)] no-underline">
+        <a href="#" className={`font-[family-name:var(--font-mono)] font-medium text-[0.65rem] tracking-[0.15em] uppercase no-underline transition-colors duration-700 ${
+          scrolled ? "text-[var(--color-text)]" : "text-white"
+        }`}>
           Imagine Fund<sup className="text-[0.4rem] ml-1">&copy;</sup>
         </a>
 
@@ -49,26 +54,28 @@ export default function Navigation() {
             <a
               key={link.href}
               href={link.href}
-              className="hidden md:inline font-[family-name:var(--font-body)] text-[0.75rem] tracking-tight-editorial text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-300 no-underline"
+              className={`hidden md:inline font-[family-name:var(--font-body)] text-[0.75rem] tracking-tight-editorial transition-colors duration-300 no-underline ${
+                scrolled
+                  ? "text-[var(--color-text-secondary)] hover:text-[var(--color-text)]"
+                  : "text-white/60 hover:text-white"
+              }`}
             >
               {link.label}
             </a>
           ))}
 
-          {/* Minimalist Mobile menu button */}
           <button
             className="md:hidden flex flex-col gap-[3px] cursor-pointer w-6 h-6 justify-center items-end"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
-            <span className={`block h-[1px] bg-[var(--color-text)] transition-all duration-300 ${mobileOpen ? "w-6 rotate-45 translate-y-[4px]" : "w-6"}`} />
-            <span className={`block h-[1px] bg-[var(--color-text)] transition-all duration-300 ${mobileOpen ? "opacity-0" : "w-4"}`} />
-            <span className={`block h-[1px] bg-[var(--color-text)] transition-all duration-300 ${mobileOpen ? "w-6 -rotate-45 -translate-y-[4px]" : "w-5"}`} />
+            <span className={`block h-[1px] transition-all duration-300 ${scrolled ? "bg-[var(--color-text)]" : "bg-white"} ${mobileOpen ? "w-6 rotate-45 translate-y-[4px]" : "w-6"}`} />
+            <span className={`block h-[1px] transition-all duration-300 ${scrolled ? "bg-[var(--color-text)]" : "bg-white"} ${mobileOpen ? "opacity-0" : "w-4"}`} />
+            <span className={`block h-[1px] transition-all duration-300 ${scrolled ? "bg-[var(--color-text)]" : "bg-white"} ${mobileOpen ? "w-6 -rotate-45 -translate-y-[4px]" : "w-5"}`} />
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile menu overlay */}
       {mobileOpen && (
         <motion.div
           initial={{ opacity: 0 }}

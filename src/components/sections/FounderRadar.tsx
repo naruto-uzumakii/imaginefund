@@ -33,56 +33,90 @@ const founders = [
 
 export default function FounderRadar() {
   return (
-    <section id="founders" className="relative w-full py-44 px-6 sm:px-8 md:px-12 bg-[var(--color-bg)]">
+    <section id="founders" className="relative w-full bg-[var(--color-bg)] text-black hairline-t">
 
-      <div className="max-w-[1200px] mx-auto">
+      <div className="section-pad container-base">
 
-        <div className="border-t border-[var(--color-border)] pt-8 mb-16">
-          <Reveal>
-            <p className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)] flex items-center gap-2.5">
-              <span className="w-1 h-1 rounded-full bg-[var(--color-text-secondary)] opacity-40" />
-              07 &mdash; Founder Radar
-            </p>
-          </Reveal>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
-        <Reveal delay={0.1}>
-          <h2 className="font-[family-name:var(--font-display)] font-normal text-[clamp(1.5rem,2.2vw,2.2rem)] leading-[1.15] tracking-tight-editorial text-[var(--color-text)] mb-12 max-w-[500px]">
-            We optimise for <em className="italic text-[var(--color-text-secondary)]">founders</em>, not ideas.
-          </h2>
-        </Reveal>
+          {/* Left: Sticky Abstract Portrait / Radar Image */}
+          <div className="lg:col-span-5 relative">
+            <div className="sticky top-32">
+              <Reveal>
+                <div className="text-eyebrow text-[var(--color-accent)] mb-8">
+                  06 — Founder Radar
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="text-h2 text-black mb-12">
+                  We optimise for <em className="italic text-black/60">founders</em>, not ideas.
+                </h2>
+              </Reveal>
 
-        <div className="w-full flex flex-col">
-          {founders.map((f, i) => (
-            <motion.div
-              key={f.name}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.08 * i, duration: 0.7 }}
-              className={`w-full grid grid-cols-1 md:grid-cols-12 border-t border-[var(--color-border)] py-6 row-hover ${
-                i === founders.length - 1 ? "border-b" : ""
-              }`}
-            >
-              <div className="col-span-1 md:col-span-4 flex items-baseline">
-                <span className="font-[family-name:var(--font-display)] text-[clamp(1rem,1.5vw,1.3rem)] leading-[1.15] text-[var(--color-text)]">
-                  {f.name}
-                </span>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full aspect-square relative overflow-hidden bg-black/5"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop"
+                  alt="Abstract human subject representing stealth founders"
+                  className="editorial-media hover:scale-105 transition-transform duration-1000 ease-out grayscale contrast-125 mix-blend-multiply opacity-90"
+                />
+                {/* Hairline framing */}
+                <span className="absolute inset-0 border border-black/10 pointer-events-none" />
+                <div className="absolute top-4 left-4">
+                  <span className="text-mono-sm text-black/60 bg-white/80 px-2 py-1 backdrop-blur-md">
+                    Target Profiles
+                  </span>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Right: Founder List */}
+          <div className="lg:col-span-7 flex flex-col pt-12 lg:pt-32">
+            <div className="w-full flex flex-col border-t border-black/10">
+              {founders.map((f, i) => (
+                <motion.div
+                  key={f.name}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i, duration: 0.7 }}
+                  className={`w-full flex flex-col border-b border-black/10 py-10 row-hover hover:bg-black/[0.02]`}
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="text-h3 text-black">
+                      {f.name}
+                    </span>
+                    <span className="text-mono-sm text-[var(--color-accent)] flex items-center gap-2 mt-2 bg-[var(--color-accent)]/10 px-3 py-1.5 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] pulse-dot" />
+                      Stealth
+                    </span>
+                  </div>
+
+                  <span className="text-body-base text-black/70 max-w-[480px]">
+                    {f.desc}
+                    <span className="ml-1"><CiteMark cardKey={f.cardKey} number={f.citeNum} /></span>
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+            <Reveal delay={0.4}>
+              <div className="mt-16 flex items-start gap-4 p-6 bg-black/[0.02] border border-black/5">
+                <span className="text-mono-sm text-black/40 mt-1 shrink-0">Note</span>
+                <p className="text-body-sm text-black/70">
+                  Our founders are repeat builders or key early operators from category defining companies. We back them before the idea is fully formed, providing the infrastructure to shape it.
+                </p>
               </div>
-              <div className="col-span-1 md:col-span-6 flex items-baseline mt-2 md:mt-0">
-                <span className="font-[family-name:var(--font-body)] text-[0.8rem] leading-[1.6] text-[var(--color-text-secondary)]">
-                  {f.desc}
-                  <CiteMark cardKey={f.cardKey} number={f.citeNum} />
-                </span>
-              </div>
-              <div className="col-span-1 md:col-span-2 flex items-baseline md:justify-end mt-1 md:mt-0">
-                <span className="font-[family-name:var(--font-mono)] text-[0.55rem] tracking-[0.15em] uppercase text-[var(--color-text-secondary)] flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-[var(--color-text-secondary)] pulse-dot" />
-                  Stealth
-                </span>
-              </div>
-            </motion.div>
-          ))}
+            </Reveal>
+
+          </div>
+
         </div>
 
       </div>

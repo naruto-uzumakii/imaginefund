@@ -19,7 +19,6 @@ export function DonutChart({
   const r = 38
   const circumference = 2 * Math.PI * r
   const total = segments.reduce((s, seg) => s + seg.value, 0)
-  let offset = 0
 
   return (
     <motion.svg
@@ -37,8 +36,7 @@ export function DonutChart({
       {segments.map((seg, i) => {
         const dash = (seg.value / total) * circumference
         const gap = circumference - dash
-        const currentOffset = offset
-        offset += dash
+        const currentOffset = segments.slice(0, i).reduce((sum, s) => sum + (s.value / total) * circumference, 0)
         return (
           <motion.circle
             key={i}

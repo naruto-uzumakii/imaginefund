@@ -1,103 +1,109 @@
 "use client"
 
-import { motion } from "framer-motion"
 import CiteMark from "@/components/ui/CiteMark"
 import Reveal from "@/components/animations/Reveal"
 import { useCountUp } from "@/hooks/useCountUp"
+import { motion } from "framer-motion"
 
-function StatItem({ numValue, prefix = "", suffix = "", label, sublabel, delay = 0 }: {
+function HugeTypographyBlock({ numValue, prefix = "", suffix = "", label, delay = 0, isBordered = true }: {
   numValue: number
   prefix?: string
   suffix?: string
   label: string
-  sublabel: string
   delay?: number
+  isBordered?: boolean
 }) {
-  const { count, ref } = useCountUp(numValue, 2200)
+  const { count, ref } = useCountUp(numValue, 1500)
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.8 }}
-      className="flex flex-col gap-3"
+      className={`pb-8 ${isBordered ? 'border-b border-black/10' : ''}`}
     >
-      <div className="font-[family-name:var(--font-mono)] text-[0.6rem] tracking-[0.12em] uppercase text-[var(--color-text-secondary)]">
+      <div className="text-massive tabular-nums text-black origin-left tracking-tighter">
+        {prefix}{count}<span className="text-[0.6em] tracking-tight whitespace-nowrap">{suffix}</span>
+      </div>
+      <p className="text-body-base text-black/80 mt-6 max-w-[320px]">
         {label}
-      </div>
-      <div className="w-8 h-px bg-[var(--color-text)] opacity-15 mb-4" />
-      <div className="font-[family-name:var(--font-display)] text-[clamp(2rem,3.5vw,3.5rem)] leading-none tracking-tight tabular-nums text-[var(--color-text)]">
-        {prefix}{count}{suffix}
-      </div>
-      <p className="font-[family-name:var(--font-body)] text-[0.8rem] leading-[1.6] text-[var(--color-text-secondary)] max-w-[240px]">
-        {sublabel}
       </p>
     </motion.div>
   )
 }
 
-const fundTerms = [
-  { label: "Total Raise", value: "$10,000,000" },
-  { label: "Vehicle", value: "Imagine Fund" },
-  { label: "Deployment", value: "~$9M across ~20 co." },
-  { label: "Check Range", value: "$100K – $500K" },
-  { label: "Min LP", value: "$100,000" },
-]
-
 export default function Fund() {
   return (
-    <section id="fund" className="relative w-full py-44 px-6 sm:px-8 md:px-12 bg-[var(--color-bg)]">
+    <section id="fund" className="relative w-full bg-[var(--color-bg)] text-black hairline-t">
 
-      <div className="max-w-[1200px] mx-auto">
+      <div className="section-pad container-base">
 
-        <div className="border-t border-[var(--color-border)] pt-8 mb-16">
-          <Reveal>
-            <p className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)] flex items-center gap-2.5">
-              <span className="w-1 h-1 rounded-full bg-[var(--color-text-secondary)] opacity-40" />
-              03 &mdash; The Capital
-            </p>
-          </Reveal>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative mt-16">
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 mb-12">
-          <div className="md:col-span-5">
-            <Reveal delay={0.1}>
-              <h2 className="font-[family-name:var(--font-display)] font-normal text-[clamp(1.5rem,2.2vw,2.2rem)] leading-[1.15] tracking-tight-editorial text-[var(--color-text)]">
-                One raise. One race. <em className="italic text-[var(--color-text-secondary)]">Creative capital.</em>
-              </h2>
+          {/* Left: Stack of massive Nike-style heavy numbers */}
+          <div className="lg:col-span-6 flex flex-col gap-8 lg:pr-12 xl:pr-24 lg:border-r lg:border-black/10">
+
+            {/* The Green INTRODUCTION label */}
+            <Reveal>
+              <div className="text-eyebrow text-[var(--color-accent)] mb-12">
+                03 — The Capital
+              </div>
             </Reveal>
+
+            <HugeTypographyBlock
+              numValue={9}
+              prefix="$"
+              suffix="M"
+              label="deployable capital directed to ~20 investments in owned or operated facilities"
+              delay={0.1}
+            />
+            <HugeTypographyBlock
+              numValue={100}
+              suffix="%"
+              label="creative infrastructure committed to every portfolio company from day zero"
+              delay={0.2}
+            />
+            <HugeTypographyBlock
+              numValue={20}
+              prefix="~"
+              suffix=""
+              label="target companies at the earliest stage of conviction in our extended network"
+              delay={0.3}
+              isBordered={false}
+            />
           </div>
-          <div className="md:col-span-7">
+
+          {/* Right: Dense editorial prose matching the Nike report right side */}
+          <div className="lg:col-span-6 pt-0 lg:pt-20">
             <Reveal delay={0.2}>
-              <p className="font-[family-name:var(--font-body)] text-[0.85rem] leading-[1.7] text-[var(--color-text-secondary)] max-w-[480px]">
-                Imagine Fund operates as a highly concentrated pool of capital. We don&rsquo;t spray and pray. We take concentrated positions and build alongside our founders.
-                <CiteMark cardKey="fund-structure" number={4} />
-              </p>
+              <div className="columns-1 md:columns-2 gap-10">
+                <p className="text-body-base text-black/90 mb-6 break-inside-avoid">
+                  Imagine Fund operates as a highly concentrated pool of capital. We see it in saturated markets, crowded pitches, and in limited runway for founders. To address the urgency of building and its impact on the market, IF is committed to innovating and partnering to find solutions that help protect the founder&apos;s vision, and with it, the future of the product.
+                  <CiteMark cardKey="fund-structure" number={4} />
+                </p>
+                <p className="text-body-base text-black/90 mb-6 break-inside-avoid">
+                  Our goal is to reduce the operational friction, and — to do this — we focus on our areas of greatest impact. We don&apos;t spray and pray. We take concentrated positions and build alongside our founders. We are prioritizing better design and making products that are easier to launch or scale.
+                </p>
+                <p className="text-body-base text-black/90 mb-6 break-inside-avoid">
+                  Every dollar deployed comes with creative infrastructure: brand, narrative, launch assets, and distribution. IF takes the same innovative approach to reducing friction across our entire value chain. From the way we operate our own facilities to how we use our influence to improve the footprint of the places where our product is manufactured.
+                </p>
+                <p className="text-body-base text-black/90 mb-6 break-inside-avoid">
+                  This is not advisory. This is hands-on production work that compounds the value of every check we write. While we increase our impact, we also work to create positive change through efforts such as video production and by bringing builders around the world along with us on our journey.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Subtext footnote as seen in the bottom right of the Nike screenshot */}
+            <Reveal delay={0.4}>
+              <div className="mt-32 pt-6 border-t border-black/10 md:ml-auto md:w-1/2">
+                <p className="text-body-sm text-black/60">
+                  46 Infrastructure refers to IF brand production, launch video assets, and distribution support that aren&apos;t fit for standard VC support.
+                </p>
+              </div>
             </Reveal>
           </div>
-        </div>
 
-        <div className="border-t border-[var(--color-border)] pt-12 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          <StatItem numValue={9} prefix="$" suffix="M" label="Deployable Capital" sublabel="Directed to ~20 investments." delay={0.3} />
-          <StatItem numValue={1} prefix="$" suffix="M" label="Mgmt Fee" sublabel="Funds operations, programs, and team." delay={0.4} />
-          <StatItem numValue={20} prefix="~" suffix="" label="Target Companies" sublabel="Category-defining founders at earliest stage." delay={0.5} />
-        </div>
-
-        <div className="border-t border-[var(--color-border)] pt-8">
-          <Reveal delay={0.5}>
-            <div className="font-[family-name:var(--font-mono)] text-[0.6rem] tracking-[0.12em] uppercase text-[var(--color-text-secondary)] mb-6">
-              Terms Overview
-            </div>
-            <div className="flex flex-col max-w-[400px]">
-              {fundTerms.map((item) => (
-                <div key={item.label} className="flex justify-between items-baseline py-2.5 border-b border-[var(--color-border)] last:border-0">
-                  <span className="font-[family-name:var(--font-body)] text-[0.75rem] text-[var(--color-text-secondary)]">{item.label}</span>
-                  <span className="font-[family-name:var(--font-mono)] text-[0.7rem] text-[var(--color-text)]">{item.value}</span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
 
       </div>

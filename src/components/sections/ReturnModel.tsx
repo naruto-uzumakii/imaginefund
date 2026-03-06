@@ -11,65 +11,85 @@ const returns = [
 
 export default function ReturnModel() {
   return (
-    <section id="returns" className="relative w-full py-44 px-6 sm:px-8 md:px-12 bg-[var(--color-bg)]">
+    <section id="returns" className="relative w-full bg-[var(--color-bg)] text-black hairline-t">
 
-      <div className="max-w-[1200px] mx-auto">
+      <div className="section-pad container-base">
 
-        <div className="border-t border-[var(--color-border)] pt-8 mb-16">
-          <Reveal>
-            <p className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)] flex items-center gap-2.5">
-              <span className="w-1 h-1 rounded-full bg-[var(--color-text-secondary)] opacity-40" />
-              09 &mdash; Returns
-            </p>
-          </Reveal>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 mb-12">
-          <div className="md:col-span-5">
-            <Reveal delay={0.1}>
-              <h2 className="font-[family-name:var(--font-display)] font-normal text-[clamp(1.5rem,2.2vw,2.2rem)] leading-[1.15] tracking-tight-editorial text-[var(--color-text)]">
-                Fund I proves the system. <em className="italic text-[var(--color-text-secondary)]">Fund II scales it.</em>
-              </h2>
-            </Reveal>
+          {/* Left Column Text */}
+          <div className="lg:col-span-5 flex flex-col justify-between mb-8 lg:mb-0">
+            <div>
+              <Reveal>
+                <div className="text-eyebrow text-[var(--color-accent)] mb-8">
+                  07 — Return Model
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.1}>
+                <h2 className="text-h2 text-black mb-8 max-w-[400px]">
+                  Fund I proves the system. <em className="italic text-black/60">Fund II scales it.</em>
+                </h2>
+              </Reveal>
+
+              <Reveal delay={0.2}>
+                <p className="text-body-base text-black/80 max-w-[480px] mb-16">
+                  Fund II target: $50M. After proof, after breakouts, after the corridor is real enough that LPs can walk through it.
+                </p>
+              </Reveal>
+            </div>
+
+            {/* ROI Table */}
+            <div className="w-full flex flex-col border-t border-black/10">
+              {returns.map((r, i) => (
+                <motion.div
+                  key={r.tier}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i, duration: 0.7 }}
+                  className={`grid grid-cols-12 py-8 row-hover hover:bg-black/[0.02] border-b border-black/10 items-baseline`}
+                >
+                  <div className="col-span-4 lg:col-span-3">
+                    <span className="text-eyebrow text-black/50">
+                      {r.tier}
+                    </span>
+                  </div>
+                  <div className="col-span-4 lg:col-span-3">
+                    <span className="text-h3 text-black">
+                      {r.multiple}
+                    </span>
+                  </div>
+                  <div className="col-span-4 lg:col-span-6">
+                    <span className="text-body-sm text-black/70">
+                      {r.desc}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
-          <div className="md:col-span-7">
-            <Reveal delay={0.2}>
-              <p className="font-[family-name:var(--font-body)] text-[0.85rem] leading-[1.7] text-[var(--color-text-secondary)] max-w-[480px]">
-                Fund II target: $50M. After proof, after breakouts, after the corridor is real enough that LPs can walk through it.
-              </p>
-            </Reveal>
-          </div>
-        </div>
 
-        <div className="w-full flex flex-col">
-          {returns.map((r, i) => (
+          {/* Right Column Image */}
+          <div className="lg:col-span-7 h-[50vh] lg:h-auto min-h-[500px]">
             <motion.div
-              key={r.tier}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.08 * i, duration: 0.7 }}
-              className={`w-full grid grid-cols-1 md:grid-cols-12 border-t border-[var(--color-border)] py-6 row-hover ${
-                i === returns.length - 1 ? "border-b" : ""
-              }`}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full h-full relative overflow-hidden bg-[#EAE8E3] rounded-xl"
             >
-              <div className="col-span-1 md:col-span-2 flex items-baseline">
-                <span className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]">
-                  {r.tier}
-                </span>
-              </div>
-              <div className="col-span-1 md:col-span-3 flex items-baseline mt-1 md:mt-0">
-                <span className="font-[family-name:var(--font-display)] text-[clamp(1.2rem,1.8vw,1.6rem)] leading-none text-[var(--color-text)]">
-                  {r.multiple}
-                </span>
-              </div>
-              <div className="col-span-1 md:col-span-7 flex items-baseline mt-2 md:mt-0">
-                <span className="font-[family-name:var(--font-body)] text-[0.8rem] leading-[1.6] text-[var(--color-text-secondary)]">
-                  {r.desc}
-                </span>
+              <img
+                src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop"
+                alt="Abstract structural glass and metal representing scale"
+                className="editorial-media inset-0 absolute h-full w-full object-cover hover:scale-105 transition-transform duration-1000 ease-out grayscale-[80%] contrast-125 mix-blend-multiply opacity-80"
+              />
+              <div className="absolute bottom-6 left-6 z-10 text-mono-sm text-[var(--color-accent)] border border-[var(--color-accent)]/30 bg-white/80 px-3 py-1.5 backdrop-blur-md rounded-full">
+                Scaling the Corridor
               </div>
             </motion.div>
-          ))}
+          </div>
+
         </div>
 
       </div>

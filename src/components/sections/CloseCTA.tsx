@@ -10,19 +10,20 @@ export default function CloseCTA() {
   return (
     <section
       id="close"
-      className="w-full flex flex-col justify-center items-center text-center px-6 sm:px-8 md:px-12 py-44 bg-[var(--color-bg)] relative"
+      className="w-full flex flex-col justify-center items-center text-center section-pad bg-[#121210] text-white relative"
     >
       {/* Decorative corner brackets */}
-      <span className="hidden md:block absolute top-16 left-[6%] w-[16px] h-[16px] border-t border-l border-[var(--color-text)] opacity-[0.06] pointer-events-none" />
-      <span className="hidden md:block absolute top-16 right-[6%] w-[16px] h-[16px] border-t border-r border-[var(--color-text)] opacity-[0.06] pointer-events-none" />
+      <span className="hidden md:block absolute top-[10%] left-[8%] w-[32px] h-[32px] border-t border-l border-white/20 opacity-50 pointer-events-none" />
+      <span className="hidden md:block absolute top-[10%] right-[8%] w-[32px] h-[32px] border-t border-r border-white/20 opacity-50 pointer-events-none" />
+      <span className="hidden md:block absolute bottom-[10%] left-[8%] w-[32px] h-[32px] border-b border-l border-white/20 opacity-50 pointer-events-none" />
+      <span className="hidden md:block absolute bottom-[10%] right-[8%] w-[32px] h-[32px] border-b border-r border-white/20 opacity-50 pointer-events-none" />
 
-      <div className="max-w-[1200px] mx-auto w-full border-t border-[var(--color-border)] pt-16 flex flex-col items-center">
+      <div className="container-base flex flex-col items-center">
 
         <Reveal>
-          <p className="font-[family-name:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)] mb-16 flex items-center gap-2.5">
-            <span className="w-1 h-1 rounded-full bg-[var(--color-text-secondary)] opacity-40" />
-            Connect
-          </p>
+          <div className="text-eyebrow text-[var(--color-accent)] mb-12">
+            End — Chapter I
+          </div>
         </Reveal>
 
         <motion.h2
@@ -30,9 +31,9 @@ export default function CloseCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.1, ease }}
-          className="font-[family-name:var(--font-display)] font-normal text-[clamp(1.5rem,2.2vw,2.2rem)] leading-[1.15] tracking-tight-editorial text-[var(--color-text)] max-w-[600px] mb-8"
+          className="text-h1 text-white max-w-[800px] mb-8"
         >
-          <em className="italic text-[var(--color-text-secondary)]">Imagine Fund</em> — creative capital as infrastructure.
+          Creative capital as <br /> <em className="italic text-white/50">infrastructure.</em>
         </motion.h2>
 
         <motion.p
@@ -40,23 +41,26 @@ export default function CloseCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.2, ease }}
-          className="font-[family-name:var(--font-body)] text-[0.85rem] leading-[1.7] text-[var(--color-text-secondary)] max-w-[440px] mb-12"
+          className="text-body-lg text-white/60 max-w-[500px] mb-16"
         >
           The earliest stage is where the highest-leverage work happens. Before startups exist. Before anyone else would bet.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3, ease }}
         >
           <a
             href="mailto:p@spacekayak.xyz"
-            className="inline-flex items-center gap-3 font-[family-name:var(--font-body)] text-[0.9rem] text-[var(--color-text)] border-b border-[var(--color-text)] pb-1 hover:text-[var(--color-text-secondary)] hover:border-[var(--color-text-secondary)] transition-colors"
+            className="group inline-flex items-center justify-center gap-4 bg-white text-black px-8 py-5 rounded-none hover:bg-white/90 transition-colors"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-text)] pulse-dot" />
-            p@spacekayak.xyz
+            <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] pulse-dot" />
+            <span className="text-eyebrow text-black">
+              p@spacekayak.xyz
+            </span>
+            <span className="font-[family-name:var(--font-display)] italic text-black/40 group-hover:text-black/60 transition-colors ml-2">&rarr;</span>
           </a>
         </motion.div>
 
@@ -65,10 +69,20 @@ export default function CloseCTA() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5, ease }}
-          className="mt-16 flex gap-8 font-[family-name:var(--font-mono)] text-[0.55rem] uppercase tracking-[0.15em] text-[var(--color-text-secondary)]"
+          className="mt-32 w-full pt-8 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/10 text-mono-sm text-white/40"
         >
-          <span>spacekayak.xyz</span>
-          <span>@imaginefund</span>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-white transition-colors">Twitter</a>
+            <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+            Imagine Fund &copy; 2026
+          </div>
+          <div className="flex gap-8">
+            <span>Bangalore</span>
+            <span>San Francisco</span>
+          </div>
         </motion.div>
 
       </div>
