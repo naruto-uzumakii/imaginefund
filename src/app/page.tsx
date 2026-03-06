@@ -22,7 +22,7 @@ export default function Home() {
     <BattleCardProvider>
       <Navigation />
 
-      <main className="relative w-full overflow-x-hidden selection:bg-[var(--color-text)] selection:text-white noise-overlay">
+      <main className="relative w-full overflow-x-clip selection:bg-[var(--color-text)] selection:text-white noise-overlay">
         <Hero />
         <Founder />
         <TheSystem />
