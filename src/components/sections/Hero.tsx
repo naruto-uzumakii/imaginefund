@@ -28,7 +28,7 @@ export default function Hero() {
         />
 
         {/* Bottom-left headline */}
-        <div className="relative z-10 h-full flex flex-col justify-end px-6 sm:px-8 md:px-12 pb-8 sm:pb-10 md:pb-12">
+        <div className="relative z-10 h-full flex flex-col justify-end px-20 pb-8 sm:pb-10 md:pb-12">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

@@ -190,8 +190,8 @@ html.lenis body {
   width: 100%;
   padding-top: clamp(6rem, 12vw, 10rem);
   padding-bottom: clamp(6rem, 12vw, 10rem);
-  padding-left: clamp(1.5rem, 4vw, 3rem);
-  padding-right: clamp(1.5rem, 4vw, 3rem);
+  padding-left: 80px;
+  padding-right: 80px;
 }
 
 /* Master Container */

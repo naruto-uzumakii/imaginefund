@@ -90,7 +90,7 @@ export default function Founder() {
 
   return (
     <section ref={sectionRef} id="who" className="relative z-10 w-full min-h-[100svh] bg-white overflow-hidden">
-      <div className="flex flex-col justify-between min-h-[100svh] px-6 sm:px-8 md:px-12 py-10">
+      <div className="flex flex-col justify-between min-h-[100svh] px-20 py-10">
 
         {/* Top — heading + body */}
         <div className="flex flex-col gap-4 max-w-[495px] pt-8">

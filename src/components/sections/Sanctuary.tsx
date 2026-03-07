@@ -48,7 +48,7 @@ export default function Sanctuary() {
       />
 
       {/* Content overlay */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-8">
+      <div className="relative z-10 flex flex-col justify-between h-full px-20 py-8">
 
         {/* Top: Heading + body */}
         <div className="flex flex-col gap-4 pt-2">

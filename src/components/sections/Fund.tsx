@@ -75,7 +75,7 @@ export default function Fund() {
 
   return (
     <section ref={sectionRef} id="fund" className="sticky w-full bg-[var(--color-bg)] z-0" style={{ top: stickyTop }}>
-      <div className="w-full px-8 pt-16 pb-32 flex flex-col gap-10">
+      <div className="w-full px-20 pt-16 pb-32 flex flex-col gap-10">
 
         {/* Eyebrow */}
         <Reveal>
